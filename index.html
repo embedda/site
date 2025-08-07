@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedda - Infraestrutura Financeira Embeddable</title>
+    <meta name="description" content="Construímos soluções embeddables nos ecossistemas dos maiores bancos e bancarizadores do Brasil. Viabilizamos projetos do tamanho da sua ambição!">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Logo CSS da Embedda */
+        .embedda-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .embedda-icon {
+            position: relative;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .hex-module {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #0066FF, #6B46C1);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            animation: pulse 2s infinite;
+        }
+        
+        .hex-module:nth-child(1) {
+            top: 0;
+            left: 12px;
+        }
+        
+        .hex-module:nth-child(2) {
+            top: 12px;
+            left: 0;
+            animation-delay: 0.3s;
+        }
+        
+        .hex-module:nth-child(3) {
+            top: 12px;
+            left: 24px;
+            animation-delay: 0.6s;
+        }
+        
+        .embedda-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066FF, #6B46C1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        /* Gradientes e efeitos */
+        .gradient-bg {
+            background: linear-gradient(135deg, #0B1426 0%, #1e293b 50%, #0f172a 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0066FF, #6B46C1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #0066FF, #6B46C1);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #0052CC, #553C9A);
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+        
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Partículas animadas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #0066FF, #6B46C1);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Menu mobile */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen">
+    <!-- Partículas animadas -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="embedda-logo">
+                    <div class="embedda-icon">
+                        <div class="hex-module"></div>
+                        <div class="hex-module"></div>
+                        <div class="hex-module"></div>
+                    </div>
+                    <span class="embedda-text">embedda</span>
+                </div>
+
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#sobre" class="hover:text-blue-400 transition-colors">Por que Embedda?</a>
+                    <a href="#negocios" class="hover:text-blue-400 transition-colors">Negócios</a>
+                    <a href="#produtos" class="hover:text-blue-400 transition-colors">Produtos</a>
+                    <a href="#clientes" class="hover:text-blue-400 transition-colors">Clientes</a>
+                    <a href="#cases" class="hover:text-blue-400 transition-colors">Cases</a>
+                    <a href="#pocs" class="hover:text-blue-400 transition-colors">POCs</a>
+                    <a href="#grupo" class="hover:text-blue-400 transition-colors">Grupo F(x)</a>
+                    <a href="#tecnologia" class="hover:text-blue-400 transition-colors">Tecnologia</a>
+                    <a href="#contato" class="hover:text-blue-400 transition-colors">Contato</a>
+                </div>
+
+                <!-- Menu Mobile Button -->
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-64 bg-gray-900/95 backdrop-blur-md border-l border-white/10 p-6">
+            <button onclick="toggleMobileMenu()" class="absolute top-4 right-4">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="flex flex-col space-y-6 mt-12">
+                <a href="#sobre" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Por que Embedda?</a>
+                <a href="#negocios" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Negócios</a>
+                <a href="#produtos" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Produtos</a>
+                <a href="#clientes" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Clientes</a>
+                <a href="#cases" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Cases</a>
+                <a href="#pocs" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">POCs</a>
+                <a href="#grupo" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Grupo F(x)</a>
+                <a href="#tecnologia" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Tecnologia</a>
+                <a href="#contato" onclick="toggleMobileMenu()" class="hover:text-blue-400 transition-colors">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                Construímos soluções <span class="gradient-text">embeddables</span> nos ecossistemas dos maiores bancos e bancarizadores do Brasil
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                Viabilizamos projetos do tamanho da sua ambição!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToSection('produtos')" class="btn-gradient px-8 py-4 rounded-lg font-semibold text-lg hover-lift">
+                    Conheça Nossas Soluções
+                </button>
+                <button onclick="scrollToSection('cases')" class="border border-blue-500 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-500/10 transition-colors hover-lift">
+                    Ver Cases de Sucesso
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estatísticas -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <div class="text-4xl font-bold gradient-text mb-2">R$ 3+ bi</div>
+                    <div class="text-gray-300">em operações processadas</div>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <div class="text-4xl font-bold gradient-text mb-2">300k+</div>
+                    <div class="text-gray-300">cadastros de empresas</div>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <div class="text-4xl font-bold gradient-text mb-2">R$ 500+ mi</div>
+                    <div class="text-gray-300">via FIDC BizCapital</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por que Embedda? -->
+    <section id="sobre" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Por que a <span class="gradient-text">Embedda</span>?
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6 gradient-text">Nossas aplicações escalam onde as outras costumam quebrar!</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-rocket text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">Desenvolvimento Nativo</h4>
+                                <p class="text-gray-300">Desenvolvemos soluções nativas nos ecossistemas dos maiores bancos e bancarizadores do Brasil</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-tachometer-alt text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">Velocidade</h4>
+                                <p class="text-gray-300">Implementação rápida com APIs que se integram em minutos, não meses</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-shield-alt text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">Conformidade</h4>
+                                <p class="text-gray-300">Total aderência às regulamentações brasileiras e compliance nativo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-8">
+                    <h4 class="text-2xl font-bold mb-6 gradient-text">Embedded Finance</h4>
+                    <p class="text-gray-300 mb-6">
+                        Somos especialistas em soluções que se "embeddam" nativamente em outros sistemas, 
+                        criando experiências financeiras invisíveis e integradas.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">APIs</div>
+                            <div class="text-sm text-gray-400">Nativas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">BaaS</div>
+                            <div class="text-sm text-gray-400">Completo</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">IA</div>
+                            <div class="text-sm text-gray-400">Embeddable</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">White-label</div>
+                            <div class="text-sm text-gray-400">Total</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Somos tecnologia e negócios -->
+    <section id="negocios" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                Somos <span class="gradient-text">tecnologia</span> e somos <span class="gradient-text">negócios</span> também!
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
+                Conectamos tecnologia de ponta com funding real, criando pontes entre inovação e capital para impulsionar o crescimento das empresas brasileiras.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-chart-line text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">R$ 3 bilhões</h3>
+                    <p class="text-gray-300">em operações de crédito processadas através de nossas soluções embeddables</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-link text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Conexão Total</h3>
+                    <p class="text-gray-300">entre tecnologia avançada e funding real para empresas de todos os portes</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-handshake text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Parceria Estratégica</h3>
+                    <p class="text-gray-300">com originadores e fundos para maximizar oportunidades de crescimento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos -->
+    <section id="produtos" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Nossos <span class="gradient-text">Produtos</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-code-branch text-3xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Esteiras Digitais de Crédito</h3>
+                    <p class="text-gray-300">APIs embeddables para originação, análise e aprovação de crédito que se integram em qualquer sistema</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-desktop text-3xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Portais de Autoatendimento</h3>
+                    <p class="text-gray-300">Interfaces white-label completas que se embeddam em plataformas existentes</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-brain text-3xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Credit Scoring e Matching Automatizado</h3>
+                    <p class="text-gray-300">Algoritmos de IA para análise de risco e matching que se integram nativamente via API</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <i class="fas fa-plug text-3xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Integrações</h3>
+                    <p class="text-gray-300">Big Data Corp, ClickSign, LLMs e dezenas de outras ferramentas essenciais</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clientes -->
+    <section id="clientes" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Nossos <span class="gradient-text">Clientes</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-industry text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Fabricante de Bebidas</h3>
+                    <p class="text-gray-300">Soluções embeddables para cadeia de fornecedores</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-university text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Principal Banco de Investimento</h3>
+                    <p class="text-gray-300">Infraestrutura financeira white-label</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-car text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Gigante Automotivo</h3>
+                    <p class="text-gray-300">APIs de crédito embeddables para concessionárias</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-drumstick-bite text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Líder em Proteína Animal</h3>
+                    <p class="text-gray-300">Soluções financeiras para produtores rurais</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-shield-alt text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Instituto de Previdência</h3>
+                    <p class="text-gray-300">Plataforma embeddable de benefícios</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 text-center hover-lift">
+                    <i class="fas fa-laptop-code text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Desenvolvedora de ERP</h3>
+                    <p class="text-gray-300">APIs financeiras integradas ao sistema</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases de Sucesso -->
+    <section id="cases" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Cases de <span class="gradient-text">Sucesso</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-industry text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Fabricante de Bebidas</h3>
+                    <p class="text-gray-300 mb-4">
+                        Implementação de esteira FIDC embeddable que se integrou nativamente ao ERP existente, 
+                        processando milhões em operações de forma invisível aos usuários finais.
+                    </p>
+                    <div class="text-sm text-blue-400 font-semibold">Embedded Finance • FIDC • ERP Integration</div>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-store text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Marketplace de Serviços</h3>
+                    <p class="text-gray-300 mb-4">
+                        Algoritmos de recomendação embeddables que se integraram perfeitamente à plataforma, 
+                        aumentando conversão e melhorando matching entre oferta e demanda.
+                    </p>
+                    <div class="text-sm text-purple-400 font-semibold">AI Algorithms • Marketplace • Embedded APIs</div>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <div class="w-12 h-12 bg-gradient-to-r from-orange-400 to-red-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-car text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Fabricante de Veículos</h3>
+                    <p class="text-gray-300 mb-4">
+                        Solução de crédito PJ com colateral embeddable que se integrou ao sistema de vendas, 
+                        oferecendo financiamento transparente no ponto de venda.
+                    </p>
+                    <div class="text-sm text-orange-400 font-semibold">Embedded Credit • Collateral • B2B Sales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POCs -->
+    <section id="pocs" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                <span class="gradient-text">POCs</span> Inovadoras
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Cobrança e Renegociação com Agentes de IA</h3>
+                    <p class="text-gray-300 mb-4">
+                        Agentes inteligentes embeddables que se integram a qualquer sistema de cobrança, 
+                        automatizando negociações com alta taxa de sucesso e experiência humanizada.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Embedda Negotiator</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">IA Conversacional</span>
+                        <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">WhatsApp API</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-8 hover-lift">
+                    <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-teal-500 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-file-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Gestão de Documentação com Agentes de IA</h3>
+                    <p class="text-gray-300 mb-4">
+                        Agentes que se embeddam em qualquer fluxo de aprovação, solicitando, validando e 
+                        processando documentos de forma inteligente e contextual.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Embedda DocAgent</span>
+                        <span class="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm">OCR + IA</span>
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Validação Automática</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grupo F(x) -->
+    <section id="grupo" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Grupo <span class="gradient-text">F(x)</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6">Ecossistema Completo de Soluções Financeiras</h3>
+                    <div class="space-y-6">
+                        <div class="glass-card rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-3 gradient-text">Finpass</h4>
+                            <p class="text-gray-300">
+                                Primeiro marketplace de crédito PJ da América Latina, conectando empresas 
+                                a soluções financeiras embeddables e personalizadas.
+                            </p>
+                        </div>
+                        <div class="glass-card rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-3 gradient-text">FIDC BizCapital</h4>
+                            <p class="text-gray-300">
+                                Fundo de investimento com R$ 500 milhões em patrimônio, oferecendo 
+                                funding real para soluções embeddables de crédito.
+                            </p>
+                        </div>
+                        <div class="glass-card rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-3 gradient-text">Investimento Estratégico</h4>
+                            <p class="text-gray-300">
+                                Apoio de fundos de Venture Capital especializados em fintech e 
+                                embedded finance para crescimento acelerado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-8">
+                    <h4 class="text-2xl font-bold mb-6 gradient-text text-center">Números do Ecossistema</h4>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="text-center border-b border-white/10 pb-4">
+                            <div class="text-3xl font-bold gradient-text">R$ 3+ bi</div>
+                            <div class="text-gray-300">Operações Processadas</div>
+                        </div>
+                        <div class="text-center border-b border-white/10 pb-4">
+                            <div class="text-3xl font-bold gradient-text">R$ 500+ mi</div>
+                            <div class="text-gray-300">FIDC BizCapital</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">300k+</div>
+                            <div class="text-gray-300">Empresas Cadastradas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologia de Ponta -->
+    <section id="tecnologia" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                Tecnologia de <span class="gradient-text">Ponta</span>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                <div class="glass-card rounded-xl p-6 text-center hover-lift">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" class="w-12 h-12 mx-auto mb-4">
+                    <h3 class="text-lg font-semibold">AWS</h3>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-lift">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-12 h-12 mx-auto mb-4">
+                    <h3 class="text-lg font-semibold">Docker</h3>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-lift">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-10 h-10 mx-auto mb-4">
+                    <h3 class="text-lg font-semibold">Kubernetes</h3>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-lift bg-white/10">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="w-12 h-12 mx-auto mb-4">
+                    <h3 class="text-lg font-semibold">MongoDB</h3>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-lift">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="w-12 h-12 mx-auto mb-4">
+                    <h3 class="text-lg font-semibold">PostgreSQL</h3>
+                </div>
+                <div class="glass-card rounded-xl p-6 text-center hover-lift">
+                    <div class="w-12 h-12 mx-auto mb-4 bg-red-600 rounded flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">KAFKA</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">Apache Kafka</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                Vamos <span class="gradient-text">Embeddar</span> Juntos?
+            </h2>
+            <p class="text-xl text-gray-300 mb-12">
+                Pronto para integrar soluções financeiras embeddables no seu negócio? 
+                Entre em contato conosco e descubra como podemos acelerar seu crescimento.
+            </p>
+            <div class="glass-card rounded-xl p-8 mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Email</div>
+                            <div class="text-gray-300">dcohen@finpass.com.br</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-rocket text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Vamos Conversar</div>
+                            <div class="text-gray-300">Sobre soluções embeddables</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-gradient px-8 py-4 rounded-lg font-semibold text-lg hover-lift">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Iniciar Conversa
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="embedda-logo mb-6 md:mb-0">
+                    <div class="embedda-icon">
+                        <div class="hex-module"></div>
+                        <div class="hex-module"></div>
+                        <div class="hex-module"></div>
+                    </div>
+                    <span class="embedda-text">embedda</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-300 mb-2">Infraestrutura Financeira Embeddable</p>
+                    <p class="text-gray-400 text-sm">© 2025 Embedda. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navegação suave
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Menu mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // Fechar menu mobile ao clicar em links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+
+        // Navegação suave para links do menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação de entrada
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
